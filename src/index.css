@@ -1,0 +1,41 @@
+body {
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: blue;
+  margin: 0;
+}
+
+h1 {
+  text-align: center;
+  color: white;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(4, 100px); 
+  gap: 10px;
+}
+
+.card {
+  width: 100px;
+  height: 100px;
+  cursor: pointer;
+}
+
+.card img,
+.card .back {
+  width: 100%;
+  height: 100%;
+  border-radius: 6px;
+}
+ 
+.back {
+  
+  background-image: url("https://ih1.redbubble.net/image.2221781543.2400/flat,750x,075,f-pad,750x1000,f8f8f8.jpg");
+  background-size: cover;
+  background-position: center;
+}
+

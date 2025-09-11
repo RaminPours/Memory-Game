@@ -1,9 +1,10 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect} from "react";
 import { Cards } from "./data/Cards";
 
 function Memory() {
   const [flippedCards, setFlippedCards] = useState([]);
   const [cards, setCards] = useState([]);
+  const [matchedCards, setMatchedCards] = useState([]);
 
   // kaarten sorteren bij het opstarten van de memory game
   useEffect(() => {
@@ -19,6 +20,7 @@ function Memory() {
     }
   };
 
+
   // 2 seconden timer ingesteld bij opgedraaide kaarten
   useEffect(() => {
     if (flippedCards.length === 2) {
@@ -29,6 +31,18 @@ function Memory() {
     }
   }, [flippedCards]);
 
+  useEffect(() => {
+    if (flippedCards.length === 2) {
+      const [firstId, secondId] = flippedCards; 
+      const firstCard = cards.find((card) => card.id === firstId);
+      const secondCard = cards.find((card) => card.id === secondId);
+      if (firstCard.img === secondCard.img) {
+        setMatchedCards([...matchedCards, firstId, secondId]);
+        setFlippedCards([]);
+      }
+    }
+  }, [flippedCards, cards, matchedCards]);
+
 
   return (
     <>
@@ -37,9 +51,11 @@ function Memory() {
     <div className="cards">
   {cards.map((card) => {
     const isFlipped = flippedCards.includes(card.id);
+    const isMatched = matchedCards.includes(card.id);
     return (
       <div key={card.id} className="card" onClick={() => handleCardClick(card)}>
-        {isFlipped ? (<img src={card.img} />) : (<p className="back"></p>)}
+      {(isFlipped || isMatched) ? (<img src={card.img} />) : (<p className="back"></p>)}
+    
       </div>
     );
   })}

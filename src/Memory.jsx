@@ -31,6 +31,7 @@ function Memory() {
     }
   }, [flippedCards]);
 
+  // Controleren of de omgedraaide kaarten overeenkomen
   useEffect(() => {
     if (flippedCards.length === 2) {
       const [firstId, secondId] = flippedCards; 
